@@ -23,6 +23,8 @@ import (
 var testDB db.Database
 
 func TestMain(m *testing.M) {
+	// Starting the container
+
 	ctx := context.Background()
 
 	pgContainer, err := postgres.Run(ctx,
@@ -44,6 +46,8 @@ func TestMain(m *testing.M) {
 		}
 	}()
 
+	// Connecting to DB
+
 	conURL, err := pgContainer.ConnectionString(ctx)
 	if err != nil {
 		log.Fatalf("failed to get connection string: %s", err)
@@ -55,9 +59,13 @@ func TestMain(m *testing.M) {
 	}
 	defer testDB.Close()
 
+	// Migrating
+
 	if err := testDB.Migrate(); err != nil {
 		log.Fatalf("failed to run migrations: %s", err)
 	}
+
+	// Running all tests
 
 	os.Exit(m.Run())
 }
@@ -65,13 +73,11 @@ func TestMain(m *testing.M) {
 // Tests
 
 func TestTransactionInterrupt(t *testing.T) {
-	if err := testDB.Migrate(); err != nil {
-		t.Fatal(err)
-	}
-
 	var userID uuid.UUID
 	var err error
 	expectedError := errors.New("Ooops")
+
+	// Running transaction but interrupt it (error condition simulation)
 
 	err = testDB.Transaction(t.Context(), func(txRepo *sqlc.Queries) error {
 		userID, err = txRepo.CreateUser(t.Context(), sqlc.CreateUserParams{
@@ -91,9 +97,12 @@ func TestTransactionInterrupt(t *testing.T) {
 
 		return expectedError
 	})
+
 	if !errors.Is(err, expectedError) {
 		t.Fatal(err)
 	}
+
+	// There's no user created (because transaction is not finished succesfuly)
 
 	_, err = testDB.GetRepo().GetUserById(t.Context(), userID)
 	if err == nil {
@@ -103,6 +112,9 @@ func TestTransactionInterrupt(t *testing.T) {
 
 func TestUserManipulations(t *testing.T) {
 	repo := testDB.GetRepo()
+
+	// Adding new user and getting his ID
+
 	userID, err := repo.CreateUser(t.Context(), sqlc.CreateUserParams{
 		UserName: pgtype.Text{
 			String: "jackjack",
@@ -117,6 +129,8 @@ func TestUserManipulations(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// Checking if the user's data is the same as we created
+
 	userData, err := repo.GetUserById(t.Context(), userID)
 	if err != nil {
 		t.Fatal(err)
@@ -126,6 +140,8 @@ func TestUserManipulations(t *testing.T) {
 		t.Fatal(errors.New("invalid data in database"))
 	}
 
+	// Removing user from DB
+
 	count, err := repo.DeleteUserById(t.Context(), userID)
 	if err != nil {
 		t.Fatal(err)
@@ -134,6 +150,8 @@ func TestUserManipulations(t *testing.T) {
 	if count != 1 {
 		t.Fatal(errors.New("invalid deletion count"))
 	}
+
+	// There's no user with this ID any more
 
 	userData, err = repo.GetUserById(t.Context(), userID)
 	if err == nil {
