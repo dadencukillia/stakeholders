@@ -1,13 +1,13 @@
-.PHONY: init_all generate_sqlc test_shared
+.PHONY: init_all gen_sqlc test_shared
 
 shared/db/sqlc: shared/db/migrations shared/db/queries sqlc.yaml
 	sqlc generate
 
 # Shortcuts
 
-init_all: generate_sqlc
+init_all: gen_sqlc
 
-generate_sqlc: shared/db/sqlc
+gen_sqlc: shared/db/sqlc
 
 # Tests
 

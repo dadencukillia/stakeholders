@@ -33,6 +33,7 @@ func ConnectConfigDatabase(ctx context.Context, cfg *config.ServiceConfig) (Data
 	return ConnectDB(ctx, conURL)
 }
 
+// Formats database runtime data into PostgreSQL connection string
 func GetDBConnectionURL(user, password, host, port, database string) string {
 	return fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", user, password, host, port, database)
 }
@@ -72,6 +73,8 @@ func (a Database) GetRepo() *sqlc.Queries {
 	return a.repo
 }
 
+// Commits all databse operations in callback at once ensuring atomicity
+// Or rollbacks all changes if error occured
 func (a Database) Transaction(ctx context.Context, callback func(txRepo *sqlc.Queries) error) error {
 	tx, err := a.pool.Begin(ctx)
 	if err != nil {
