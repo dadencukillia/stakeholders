@@ -8,8 +8,8 @@ import (
 
 	"github.com/dadencukillia/stakeholders/shared/config"
 	"github.com/dadencukillia/stakeholders/shared/db/sqlc"
-	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/pressly/goose/v3"
 )
 

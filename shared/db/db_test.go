@@ -83,11 +83,11 @@ func TestTransactionInterrupt(t *testing.T) {
 		userID, err = txRepo.CreateUser(t.Context(), sqlc.CreateUserParams{
 			UserName: pgtype.Text{
 				String: "jackjack",
-				Valid: true,
+				Valid:  true,
 			},
 			FullName: pgtype.Text{
 				String: "Jack Jackson",
-				Valid: true,
+				Valid:  true,
 			},
 		})
 
@@ -118,11 +118,11 @@ func TestUserManipulations(t *testing.T) {
 	userID, err := repo.CreateUser(t.Context(), sqlc.CreateUserParams{
 		UserName: pgtype.Text{
 			String: "jackjack",
-			Valid: true,
+			Valid:  true,
 		},
 		FullName: pgtype.Text{
 			String: "Jack Jackson",
-			Valid: true,
+			Valid:  true,
 		},
 	})
 	if err != nil {

@@ -23,13 +23,13 @@ func TestSimpleConfigParsing(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	expected := config.ServiceConfig {
-		Database: config.ServiceDatabaseConfig {
-			User: "root",
+	expected := config.ServiceConfig{
+		Database: config.ServiceDatabaseConfig{
+			User:     "root",
 			Password: "mysupersecretpass",
-			Host: "postgres",
-			Port: 5173,
-			Name: "stakeholders",
+			Host:     "postgres",
+			Port:     5173,
+			Name:     "stakeholders",
 		},
 	}
 

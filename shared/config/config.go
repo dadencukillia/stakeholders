@@ -16,11 +16,11 @@ type ServiceConfig struct {
 }
 
 type ServiceDatabaseConfig struct {
-	User string `toml:"user"`
+	User     string `toml:"user"`
 	Password string `toml:"password"`
-	Host string `toml:"host"`
-	Port uint16 `toml:"port"`
-	Name string `toml:"name"`
+	Host     string `toml:"host"`
+	Port     uint16 `toml:"port"`
+	Name     string `toml:"name"`
 }
 
 // Parser
