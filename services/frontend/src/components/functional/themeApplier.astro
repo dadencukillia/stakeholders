@@ -1,17 +1,12 @@
 ---
-import themeScript from "@/lib/browser/theme.js?raw";
-import * as esbuild from 'esbuild';
+/* 
+ * Checks user's prefered theme or uses browser's theme
+ * Adds "dark" class into <html> tag if the dark theme was chosen
+ * Good for TailwindCSS websites
+ * Put it in your <head> tag
+ */
 
-const autoRunScript = `
-${ themeScript }
-document.documentElement.classList.toggle("dark", getTheme() === "dark");
-`;
-
-const autoRunMinifiedScript = esbuild.transformSync(autoRunScript, {
-  minify: true,
-  loader: "js",
-  treeShaking: true
-});
+ import autoRunMinifiedScript from "@/lib/server/minifiedThemeScriptGenerator";
 ---
 
 <script is:inline set:html={ autoRunMinifiedScript.code } type="module" />
