@@ -1,0 +1,17 @@
+---
+import themeScript from "@/lib/browser/theme.js?raw";
+import * as esbuild from 'esbuild';
+
+const autoRunScript = `
+${ themeScript }
+document.documentElement.classList.toggle("dark", getTheme() === "dark");
+`;
+
+const autoRunMinifiedScript = esbuild.transformSync(autoRunScript, {
+  minify: true,
+  loader: "js",
+  treeShaking: true
+});
+---
+
+<script is:inline set:html={ autoRunMinifiedScript.code } type="module" />

@@ -1,5 +1,14 @@
 ---
-import "@/styles/global.css"
+import "@/styles/global.css";
+import ThemeApplier from "@/components/functional/themeApplier.astro";
+
+interface Props {
+  title: string
+}
+
+const {
+  title = "My App"
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -7,17 +16,9 @@ import "@/styles/global.css"
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Astro App</title>
+    <title>{ title }</title>
 
-    <script is:inline>
-      const localTheme = localStorage.getItem("darkTheme");
-
-      const isDarkTheme = localTheme
-        ? localTheme === "true"
-        : window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      document.documentElement.classList.toggle("dark", isDarkTheme);
-    </script>
+    <ThemeApplier />
   </head>
   <body>
     <slot />
