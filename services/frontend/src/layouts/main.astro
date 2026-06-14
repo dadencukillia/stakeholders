@@ -1,0 +1,25 @@
+---
+import "@/styles/global.css"
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Astro App</title>
+
+    <script is:inline>
+      const localTheme = localStorage.getItem("darkTheme");
+
+      const isDarkTheme = localTheme
+        ? localTheme === "true"
+        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      document.documentElement.classList.toggle("dark", isDarkTheme);
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
