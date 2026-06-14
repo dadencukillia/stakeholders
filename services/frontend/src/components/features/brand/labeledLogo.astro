@@ -1,0 +1,18 @@
+---
+import * as config from "@/lib/config";
+import { cn } from "@/lib/utils";
+import Logo from "./logo.astro";
+
+interface Props {
+  class?: string
+}
+
+const {
+  class: className = ""
+} = Astro.props;
+---
+
+<div class={ cn("flex flex-row gap-1 items-center", className) }>
+  <Logo />
+  <h1 class="font-bold">{ config.websiteName.toUpperCase() }</h1>
+</div>
