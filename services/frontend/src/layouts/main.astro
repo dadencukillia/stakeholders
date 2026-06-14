@@ -1,13 +1,18 @@
 ---
 import "@/styles/global.css";
 import ThemeApplier from "@/components/functional/themeApplier.astro";
+import * as config from "@/lib/config";
 
 interface Props {
-  title: string
+  title?: string,
+  description?: string,
+  thumbnailURL?: string
 }
 
 const {
-  title = "My App"
+  title = config.websiteName,
+  description,
+  thumbnailURL
 } = Astro.props;
 ---
 
@@ -17,6 +22,21 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{ title }</title>
+
+    <meta property="og:title" content={ title } />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={ config.websiteName } />
+
+    { thumbnailURL && (<>
+      <meta property="og:image" content={ thumbnailURL } />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content={ thumbnailURL } />
+    </>) }
+
+    { description && (<>
+      <meta name="description" content={ description } />
+      <meta property="og:description" content={ description } />
+    </>) }
 
     <ThemeApplier />
   </head>
