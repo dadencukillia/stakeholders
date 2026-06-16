@@ -1,0 +1,22 @@
+---
+import { ArrowRight } from "@lucide/astro";
+import { Button } from "@/components/ui/button";
+---
+
+<section class="mx-auto w-container px-container py-20">
+  <div class="relative overflow-hidden rounded-2xl border border-border bg-card px-6 py-14 text-center">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,oklch(0.68_0.16_250/0.15),transparent)]" />
+    <h2 class="mx-auto max-w-xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+      Give your clients a reason to trust the process
+    </h2>
+    <p class="mx-auto mt-4 max-w-lg text-pretty text-muted-foreground">
+      Create your first shared project in under a minute. It&apos;s free to start.
+    </p>
+    <div class="mt-8 flex justify-center">
+      <Button size="lg">
+        Get started
+        <ArrowRight data-icon="inline-end" />
+      </Button>
+    </div>
+  </div>
+</section>
