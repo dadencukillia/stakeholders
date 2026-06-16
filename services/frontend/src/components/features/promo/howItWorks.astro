@@ -17,7 +17,7 @@ const sections: Section[] = [
 >
   <div class="mx-auto w-container px-container py-20">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="text-sm font-medium text-primary">How it works</p>
+      <p class="text-sm font-medium text-primary-foreground">How it works</p>
       <h2 class="mt-2 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
         From repo to client in three steps
       </h2>
@@ -25,7 +25,7 @@ const sections: Section[] = [
     <div class="mt-12 grid gap-6 md:grid-cols-3">
       { sections.map((s, index) => (
         <div class="relative rounded-xl border border-border bg-background p-6">
-          <span class="font-mono text-sm text-muted">{ index.toString().padStart(2, "0") }</span>
+          <span class="font-mono text-sm text-muted-foreground">{ index.toString().padStart(2, "0") }</span>
           <h3 class="mt-3 text-lg font-medium">{ s.title }</h3>
           <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
             { s.description }
