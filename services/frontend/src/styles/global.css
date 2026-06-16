@@ -134,4 +134,12 @@
 	html {
 		@apply font-sans;
 	}
+
+  .w-container {
+    @apply w-full max-w-6xl;
+  }
+
+  .px-container {
+    @apply px-4 sm:px-6;
+  }
 }

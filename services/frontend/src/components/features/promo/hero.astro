@@ -1,0 +1,22 @@
+---
+import { ArrowRight } from "@lucide/astro";
+import { Button } from "@/components/ui/button";
+---
+
+<div id="hero" class="w-full pb-16 pt-20 sm:pt-28">
+  <div class="w-container px-container mx-auto">
+    <h1 class="mx-auto text-balance text-center font-semibold tracking-tight text-4xl sm:text-6xl">Show clients the work, not just the invoice</h1>
+    <p class="mx-auto mt-5 max-w-xl text-pretty text-center leading-relaxed text-muted-foreground text-base sm:text-lg">
+      A freelancer — client collaboration platform
+    </p>
+    <div class="flex gap-3 mt-8 items-center justify-center flex-col sm:flex-row">
+      <Button size="lg">
+        Start sharing free
+        <ArrowRight data-icon="inline-end" />
+      </Button>
+      <Button size="lg" variant="outline">
+        See a shared project
+      </Button>
+    </div>
+  </div>
+</div>
