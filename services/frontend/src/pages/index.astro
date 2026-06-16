@@ -5,7 +5,8 @@ import CTA from "@/components/features/promo/cta.astro";
 import Hero from "@/components/features/promo/hero.astro";
 import HowItWorks from "@/components/features/promo/howItWorks.astro";
 import { Button } from "@/components/ui/button";
-import Layout from "@/layouts/main.astro"
+import Layout from "@/layouts/main.astro";
+import { UserNavDynamic } from "@/components/features/profile/userNav";
 
 export const prerender = true;
 
@@ -22,13 +23,14 @@ const navLinks: NavLink[] = [
 
 <Layout>
   <Header>
-    <nav class="flex flex-1 flex-row gap-2 align-center text-center justify-end">
+    <nav class="flex flex-1 flex-row gap-2 items-center text-center justify-center">
       { navLinks.map(nl => (
         <a href={ nl.link }>
           <Button variant="ghost" size="sm">{ nl.text }</Button>
         </a>
       )) }
     </nav>
+    <UserNavDynamic client:load />
   </Header>
   <Hero />
   <HowItWorks />

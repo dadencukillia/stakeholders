@@ -1,0 +1,80 @@
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from "@/components/ui/avatar";
+import useSWR from "swr";
+import { fetcher } from "@/lib/fetcher";
+
+export const UserNavData = ({
+  avatarUrl,
+  username
+}: {
+  avatarUrl: string,
+  username: string
+}) => {
+  return (<DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="ghost" className="px-4 py-6">
+        <div className="flex flex-row gap-2 items-center">
+          <Avatar>
+            <AvatarImage src={ avatarUrl } alt="user avatar" />
+            <AvatarFallback>LR</AvatarFallback>
+          </Avatar>
+          <div class="max-w-48 overflow-hidden text-ellipsis">{ username }</div>
+        </div>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuGroup>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuItem>Team</DropdownMenuItem>
+        <DropdownMenuItem>Subscription</DropdownMenuItem>
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>);
+};
+
+export const UserNavUnlogged = () => {
+  return (<div className="flex items-center gap-2">
+    <Button variant="ghost" size="sm">
+      Log in
+    </Button>
+    <Button size="sm">
+      Get started
+    </Button>
+  </div>);
+};
+
+export const UserNavPlaceholder = () => {
+  return (<div class="flex flex-row gap-2 items-center px-4 py-6">
+    <Skeleton className="rounded-full aspect-square size-8" />
+    <Skeleton className="w-24 h-3" />
+  </div>);
+};
+
+export const UserNavDynamic = () => {
+  const { data, error, isLoading } = useSWR("https://www.fakerapi.it/api/v2/users?_quantity=1", fetcher);
+
+  
+  if (error) return (<></>);
+  if (isLoading) return <UserNavPlaceholder />;
+
+  return <UserNavData avatarUrl={ data["data"][0]["image"] } username={ data["data"][0]["username"] } />
+}
