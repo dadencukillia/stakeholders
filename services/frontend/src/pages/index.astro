@@ -1,16 +1,23 @@
 ---
+import Footer from "@/components/common/footer.astro";
 import Header from "@/components/common/header.astro";
 import CTA from "@/components/features/promo/cta.astro";
 import Hero from "@/components/features/promo/hero.astro";
 import HowItWorks from "@/components/features/promo/howItWorks.astro";
 import Layout from "@/layouts/main.astro"
+
+export const prerender = true;
 ---
 
 <Layout>
   <Header>
-    <a href="/">Main page</a>
+    <nav class="flex flex-1 flex-row gap-8 align-center text-center justify-end">
+      <a href="#hero">Get started</a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
   </Header>
   <Hero />
   <HowItWorks />
   <CTA />
+  <Footer />
 </Layout>
