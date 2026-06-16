@@ -4,16 +4,30 @@ import Header from "@/components/common/header.astro";
 import CTA from "@/components/features/promo/cta.astro";
 import Hero from "@/components/features/promo/hero.astro";
 import HowItWorks from "@/components/features/promo/howItWorks.astro";
+import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/main.astro"
 
 export const prerender = true;
+
+interface NavLink {
+  text: string,
+  link: string
+}
+
+const navLinks: NavLink[] = [
+  { text: "Get started", link: "#hero" },
+  { text: "How it works", link: "#how-it-works" },
+];
 ---
 
 <Layout>
   <Header>
-    <nav class="flex flex-1 flex-row gap-8 align-center text-center justify-end">
-      <a href="#hero">Get started</a>
-      <a href="#how-it-works">How it works</a>
+    <nav class="flex flex-1 flex-row gap-2 align-center text-center justify-end">
+      { navLinks.map(nl => (
+        <a href={ nl.link }>
+          <Button variant="ghost" size="sm">{ nl.text }</Button>
+        </a>
+      )) }
     </nav>
   </Header>
   <Hero />
