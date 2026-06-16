@@ -70,7 +70,10 @@ export const UserNavPlaceholder = () => {
 };
 
 export const UserNavDynamic = () => {
-  const { data, error, isLoading } = useSWR("https://www.fakerapi.it/api/v2/users?_quantity=1", fetcher);
+  const { data, error, isLoading } = useSWR("https://www.fakerapi.it/api/v2/users?_quantity=1", fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
 
   
   if (error) return (
