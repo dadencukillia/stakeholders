@@ -32,7 +32,7 @@ export const UserNavData = ({
             <AvatarImage src={ avatarUrl } alt="user avatar" />
             <AvatarFallback>A</AvatarFallback>
           </Avatar>
-          <div class="max-w-48 overflow-hidden text-ellipsis hidden sm:block text-nowrap">{ username }</div>
+          <div className="max-w-48 overflow-hidden text-ellipsis hidden sm:block text-nowrap">{ username }</div>
         </div>
       </Button>
     </DropdownMenuTrigger>
@@ -63,7 +63,7 @@ export const UserNavUnlogged = () => {
 };
 
 export const UserNavPlaceholder = () => {
-  return (<div class="flex flex-row gap-2 items-center px-4 py-6">
+  return (<div className="flex flex-row gap-2 items-center px-4 py-6">
     <Skeleton className="rounded-full aspect-square size-8" />
     <Skeleton className="w-24 h-3 hidden sm:block" />
   </div>);

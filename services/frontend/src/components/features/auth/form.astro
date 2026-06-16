@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import {
+  Field,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+interface Props extends HTMLAttributes<'form'> {
+  action: "login"|"register"
+}
+
+const props = Astro.props;
+---
+
+<form method="post" target={ `/auth/${props.action}` }>
+  <FieldSet>
+    <FieldGroup>
+      <Field>
+        <FieldLabel htmlFor="username">Username</FieldLabel>
+        <Input id="username" type="text" placeholder="myusername" maxLength={ 32 } required />
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="password">Password</FieldLabel>
+        <Input id="password" type="password" placeholder="123" maxLength={ 32 } required />
+      </Field>
+      <Field orientation="horizontal">
+        <Button type="submit">Submit</Button>
+      </Field>
+    </FieldGroup>
+  </FieldSet>
+</form>

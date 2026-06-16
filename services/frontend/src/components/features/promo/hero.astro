@@ -1,6 +1,8 @@
 ---
 import { ArrowRight } from "@lucide/astro";
+import { ModalAuthForm } from "@/components/features/auth/modal";
 import { Button } from "@/components/ui/button";
+import AuthForm from "@/components/features/auth/form.astro";
 ---
 
 <section id="hero" class="w-full pb-16 pt-20 sm:pt-28">
@@ -10,10 +12,14 @@ import { Button } from "@/components/ui/button";
       A freelancer — client collaboration platform
     </p>
     <div class="flex gap-3 mt-8 items-center justify-center flex-col sm:flex-row">
-      <Button size="lg">
-        Start sharing free
-        <ArrowRight data-icon="inline-end" />
-      </Button>
+      <ModalAuthForm action="register" client:idle>
+        <Button size="lg">
+          Start sharing free
+          <ArrowRight data-icon="inline-end" />
+        </Button>
+
+        <AuthForm action="register" slot="formSlot" />
+      </ModalAuthForm>
       <Button size="lg" variant="outline">
         See a shared project
       </Button>

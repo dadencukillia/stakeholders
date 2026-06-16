@@ -1,5 +1,7 @@
 ---
 import { ArrowRight } from "@lucide/astro";
+import { ModalAuthForm } from "@/components/features/auth/modal";
+import AuthForm from "@/components/features/auth/form.astro";
 import { Button } from "@/components/ui/button";
 ---
 
@@ -16,10 +18,14 @@ import { Button } from "@/components/ui/button";
       Create your first shared project in under a minute. It&apos;s free to start.
     </p>
     <div class="mt-8 flex justify-center">
-      <Button size="lg">
-        Get started
-        <ArrowRight data-icon="inline-end" />
-      </Button>
+      <ModalAuthForm action="register" client:visible>
+        <Button size="lg">
+          Get started
+          <ArrowRight data-icon="inline-end" />
+        </Button>
+
+        <AuthForm action="register" slot="formSlot" />
+      </ModalAuthForm>
     </div>
   </div>
 </section>
