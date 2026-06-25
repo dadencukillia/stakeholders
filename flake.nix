@@ -20,6 +20,21 @@
 
         shellHook = ''
           echo "❄️ Welcome back, stakeholders developer ❄️"
+
+          export ISOLATED_DIR="$(pwd)/.envgarbage"
+          mkdir -p "$ISOLATED_DIR"
+
+          # Go isolation
+          export GO_GARBAGE="$ISOLATED_DIR/go"
+          export GOPATH="$GO_GARBAGE/path"
+          export GOBIN="$GO_GARBAGE/bin"
+          export GOCACHE="$GO_GARBAGE/cache"
+
+          mkdir -p "$GOPATH"
+          mkdir -p "$GOBIN"
+          mkdir -p "$GOCACHE"
+
+          export PATH="$GOBIN:$PATH"
         '';
       };
     };
