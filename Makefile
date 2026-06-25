@@ -12,6 +12,13 @@ install_tools:
 format:
 	gofmt -w ./shared
 
+nixenv:
+	# nix-shell -p gnumake --run "make nixenv" --extra-experimental-features flakes
+	nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
+
+allow_direnv:
+	direnv allow
+
 # Generators
 
 gen_all: gen_sqlc
