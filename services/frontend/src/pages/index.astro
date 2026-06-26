@@ -25,7 +25,7 @@ const navLinks: NavLink[] = [
   <Header>
     <nav class="flex flex-1 flex-row gap-2 items-center text-center justify-center">
       { navLinks.map(nl => (
-        <a href={ nl.link }>
+        <a key={ nl.text } href={ nl.link }>
           <Button variant="ghost" size="sm" className="hidden md:inline-flex">{ nl.text }</Button>
         </a>
       )) }

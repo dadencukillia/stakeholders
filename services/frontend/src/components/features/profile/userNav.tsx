@@ -92,8 +92,8 @@ export const UserNavDynamic = () => {
 
 	return (
 		<UserNavData
-			avatarUrl={data["data"][0]["image"]}
-			username={data["data"][0]["username"]}
+			avatarUrl={data.data[0].image}
+			username={data.data[0].username}
 		/>
 	);
 };
