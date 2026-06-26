@@ -16,6 +16,11 @@
           gnumake
           go_1_26
           bun
+
+          # Frontend LSP
+          typescript
+          typescript-language-server
+          biome
         ];
 
         shellHook = ''

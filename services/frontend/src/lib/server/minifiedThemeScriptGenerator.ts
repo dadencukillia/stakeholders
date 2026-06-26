@@ -1,5 +1,5 @@
 /*
- * Generates minified script that adds "dark" class for 
+ * Generates minified script that adds "dark" class for
  * <html> tag if dark theme prefered
  *
  * @remarks
@@ -12,15 +12,15 @@ import * as esbuild from "esbuild";
 import themeScript from "@/lib/browser/theme.js?raw";
 
 const autoRunScript = `
-${ themeScript };
+${themeScript};
 document.documentElement.classList.toggle("dark", getTheme() === "dark");
 `;
 
 const autoRunMinifiedScript = esbuild.transformSync(autoRunScript, {
-  minify: true,
-  loader: "js",
-  treeShaking: false,
-  format: "esm"
+	minify: true,
+	loader: "js",
+	treeShaking: false,
+	format: "esm",
 });
 
 export default autoRunMinifiedScript;

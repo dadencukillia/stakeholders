@@ -1,30 +1,30 @@
 const localStorageKey = "darkTheme";
 
 export const getUserPreferedTheme = () => {
-  const localTheme = localStorage.getItem(localStorageKey);
-  if (!localTheme) {
-    return undefined;
-  }
+	const localTheme = localStorage.getItem(localStorageKey);
+	if (!localTheme) {
+		return undefined;
+	}
 
-  return localTheme === "true" ? "dark" : "light";
+	return localTheme === "true" ? "dark" : "light";
 };
 
 export const getBrowserTheme = () => {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? "dark"
-    : "light";
+	return window.matchMedia("(prefers-color-scheme: dark)").matches
+		? "dark"
+		: "light";
 };
 
 export const getTheme = () => {
-  const userPrefered = getUserPreferedTheme();
+	const userPrefered = getUserPreferedTheme();
 
-  if (!userPrefered) return getBrowserTheme();
+	if (!userPrefered) return getBrowserTheme();
 
-  return userPrefered;
+	return userPrefered;
 };
 
 export const setUserPreferedTheme = (newTheme) => {
-  if (!newTheme) localStorage.removeItem(localStorageKey);
+	if (!newTheme) localStorage.removeItem(localStorageKey);
 
-  localStorage.setItem(localStorageKey, newTheme === "dark" ? "true" : "false");
+	localStorage.setItem(localStorageKey, newTheme === "dark" ? "true" : "false");
 };

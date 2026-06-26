@@ -135,11 +135,11 @@
 		@apply font-sans scroll-smooth;
 	}
 
-  .w-container {
-    @apply w-full max-w-6xl;
-  }
+	.w-container {
+		@apply w-full max-w-6xl;
+	}
 
-  .px-container {
-    @apply px-4 sm:px-6;
-  }
+	.px-container {
+		@apply px-4 sm:px-6;
+	}
 }
