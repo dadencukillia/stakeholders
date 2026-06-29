@@ -1,0 +1,48 @@
+---
+import type { ProjectStatus } from "@/lib/types/project";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { type AstroComponent, CircleDot, CircleCheck, CirclePause, CircleStop } from "@lucide/astro";
+
+interface Props {
+  class?: string,
+  status: ProjectStatus
+}
+
+const {
+  class: className,
+  status
+} = Astro.props;
+
+const stylesMap: Record<ProjectStatus, string> = {
+  working:
+    "border-chart-1/30 bg-chart-1/10 text-chart-1 [&>svg]:text-chart-1",
+  finished:
+    "border-chart-2/30 bg-chart-2/10 text-chart-2 [&>svg]:text-chart-2",
+  paused:
+    "border-chart-3/30 bg-chart-3/10 text-chart-3 [&>svg]:text-chart-3",
+  dropped:
+    "border-chart-4/30 bg-chart-4/10 text-chart-4 [&>svg]:text-chart-4",
+};
+
+const iconsMap: Record<ProjectStatus, AstroComponent> = {
+  working: CircleDot,
+  finished: CircleCheck,
+  paused: CirclePause,
+  dropped: CircleStop
+};
+
+const labelsMap: Record<ProjectStatus, string> = {
+  working: "Under working",
+  finished: "Finished",
+  paused: "Paused",
+  dropped: "Dropped"
+};
+
+const IconComponent = iconsMap[status];
+---
+
+<Badge variant="outline" className={cn("gap-1.5", stylesMap[status], className)}>
+  { <IconComponent /> }
+  { labelsMap[status] }
+</Badge>

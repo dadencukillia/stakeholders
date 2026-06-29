@@ -1,25 +1,49 @@
 ---
+import type { ProjectCardProps, ProjectStatus } from "@/lib/types/project";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Plus } from "@lucide/astro";
+import ProjectCard from "@/components/features/project/projectCard.astro";
 
-type ProjectStatus = "working"|"paused"|"finished"|"failed";
+function generateRandomProjectCard(): ProjectCardProps {
+  const titles = [
+    "Nova Storefront",
+    "Insight Dashboard",
+    "Atlas Landing",
+    "Telegram Bot",
+    "Discord Bot",
+    "Comments system"
+  ];
+  const statuses: ProjectStatus[] = [
+    "working",
+    "finished",
+    "paused",
+    "dropped"
+  ];
 
-interface Project {
-  title: string,
-  description: string,
-  status: ProjectStatus,
-  branch: string,
-  files: number,
-  wakaHours: number
+  return {
+    id: crypto.randomUUID(),
+    shareUrl: crypto.randomUUID(),
+    title: titles[Math.floor(Math.random() * titles.length)],
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi elit, volutpat eu metus sed, elementum hendrerit eros. Maecenas viverra massa eu aliquet tristique",
+    commits: Math.ceil(Math.random() * 100),
+    branches: Math.ceil(Math.random() * 10),
+    wakaHours: Math.floor(Math.random() * 1000),
+    status: statuses[Math.floor(Math.random() * statuses.length)],
+    codeAccess: Math.random() >= 0.5,
+  };
 }
 
-const projects: Project[] = [
+const projects: ProjectCardProps[] = [
+  generateRandomProjectCard(),
+  generateRandomProjectCard(),
+  generateRandomProjectCard(),
+  generateRandomProjectCard(),
 ];
 ---
 
-<section class="container flex-col gap-2 mt-10">
+<section class="container flex-col mt-10">
   <div class="flex flex-row items-center justify-between gap-5">
     <div class="flex flex-row items-center gap-2">
       <h1 class="font-bold">Your projects</h1>
@@ -30,5 +54,10 @@ const projects: Project[] = [
       <Plus />
       <span>New project</span>
     </Button>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-5">
+    { projects.map(project => (
+      <ProjectCard key={ project.id } {...project} />
+    )) }
   </div>
 </section>
