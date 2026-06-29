@@ -7,7 +7,8 @@ export interface ProjectCardProps {
   description: string,
   commits: number,
   branches: number,
-  wakaHours: number,
+  workingHours: number,
+  manualStatus: string,
   status: ProjectStatus,
   codeAccess: boolean,
 } 

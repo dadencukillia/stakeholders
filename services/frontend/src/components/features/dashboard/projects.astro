@@ -21,6 +21,15 @@ function generateRandomProjectCard(): ProjectCardProps {
     "paused",
     "dropped"
   ];
+  const manualStatuses: string[] = [
+    "Designing the lending UI",
+    "Bugs fixing",
+    "Coding a hero",
+    "Website UX designing",
+    "Recoloring a button",
+    "Markup coding",
+    ""
+  ];
 
   return {
     id: crypto.randomUUID(),
@@ -29,7 +38,8 @@ function generateRandomProjectCard(): ProjectCardProps {
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi elit, volutpat eu metus sed, elementum hendrerit eros. Maecenas viverra massa eu aliquet tristique",
     commits: Math.ceil(Math.random() * 100),
     branches: Math.ceil(Math.random() * 10),
-    wakaHours: Math.floor(Math.random() * 1000),
+    workingHours: Math.floor(Math.random() * 1000),
+    manualStatus: manualStatuses[Math.floor(Math.random() * manualStatuses.length)],
     status: statuses[Math.floor(Math.random() * statuses.length)],
     codeAccess: Math.random() >= 0.5,
   };
